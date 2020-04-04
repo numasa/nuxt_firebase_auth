@@ -91,5 +91,5 @@ $ docker-compose run -p 9005:9005 vue ash
 
 7. access DEMO site by browser
 - https://nuxtfirebaseauth.web.app/
-- Email: test@example.com
-- Pass: testtest
+  - Email: test@example.com
+  - Pass: testtest
