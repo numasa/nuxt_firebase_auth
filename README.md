@@ -35,6 +35,12 @@ $ git clone https://github.com/numasa/nuxt_firebase_auth.git
 $ cd nuxt_firebase_auth
 ```
 
+2. make .env file
+```bash
+$ touch project/src/.env
+```
+Write your firebase config to .env (ref.[Prepare](#Prepare))
+
 2. build & yarn install
 ```bash
 $ docker-compose run vue yarn install
