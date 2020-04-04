@@ -1,0 +1,11 @@
+version: '3'
+services:
+  vue:
+    build: ./vue
+    working_dir: /home/node/app/project
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 3000:3000
+    environment:
+      - HOST=0.0.0.0
