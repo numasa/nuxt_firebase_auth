@@ -41,17 +41,17 @@ $ touch project/src/.env
 ```
 Write your firebase config to .env (ref.[Prepare](#Prepare))
 
-2. build & yarn install
+3. build & yarn install
 ```bash
 $ docker-compose run vue yarn install
 ```
 
-3. service run on localhost
+4. service run on localhost
 ```bash
 $ docker-compose run --service-ports vue yarn run dev
 ```
 
-4. access localhost:3000 by browser
+5. access localhost:3000 by browser
 - [http://localhost:3000/](http://localhost:3000/)
 
 ## Deploy
