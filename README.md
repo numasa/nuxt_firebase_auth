@@ -62,7 +62,7 @@ $ docker-compose run -p 9005:9005 vue ash
 ```
 
 2. generate
-```bash
+```ash
 # yarn run generate
 ```
 
