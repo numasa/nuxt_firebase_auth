@@ -56,14 +56,14 @@ $ docker-compose run --service-ports vue yarn run dev
 
 ## Deploy
 deploy to your Firebase Project's Hosting service.
-1. generate
-```bash
-$ yarn run generate
-```
-
-2. exec docker
+1. exec docker
 ```bash
 $ docker-compose run -p 9005:9005 vue ash
+```
+
+2. generate
+```bash
+# yarn run generate
 ```
 
 3. add firebase-tools
