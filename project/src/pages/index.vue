@@ -1,35 +1,25 @@
 <template>
   <div class="container">
     <div>
-      <div v-if="loginUser" class="loginuser">
-        <div class="text-center">{{ loginUser }}としてログイン中です</div>
-        <button class="button--green" @click="logout">ログアウト</button>
-      </div>
-      <div v-else class="loginuser">
-        <div class="text-center">未ログインです</div>
-        <button class="button--green" @click="login">ログインする</button>
-      </div>
       <logo />
       <h1 class="title">
         project
       </h1>
       <h2 class="subtitle">
-        Test Nuxt.js Project
+        Sample Project
       </h2>
       <div class="links">
         <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
+          href="/members-only"
           class="button--grey"
         >
-          GitHub
+          MembersOnlyPage
+        </a>
+        <a
+          href="/not-members-only"
+          class="button--grey"
+        >
+          NotMembersOnlyPage
         </a>
       </div>
     </div>
@@ -39,7 +29,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Logo from '~/components/Logo.vue'
-import { auth } from '../plugins/firebase'
 
 // Topページ
 @Component({
@@ -48,23 +37,7 @@ import { auth } from '../plugins/firebase'
     Logo
   }
 })
-export default class Home extends Vue {
-  loginUser:string  | null = null
-  async mounted() {
-    await auth.onAuthStateChanged((user) => {
-      if(user) {
-        this.loginUser = user.email 
-      }
-    })
-  }
-  async logout() {
-    await auth.signOut()
-    this.$router.push('/')
-  }
-  async login() {
-    this.$router.push('/login')
-  }
-}
+export default class Index extends Vue {}
 </script>
 
 <style>

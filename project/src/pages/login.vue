@@ -1,31 +1,29 @@
 <template>
-  <div class="container">
-    <v-flex xs6>
-      <v-card>
-        <v-card-title>Login</v-card-title>
-        <v-card-text>
-          <form>
-            <v-text-field
-              name="login"
-              label="メールアドレス"
-              type="text"
-              v-model="mail"
-              required
-            ></v-text-field>
-            <v-text-field
-              name="password"
-              label="パスワード"
-              id="password"
-              type="password"
-              v-model="pass"
-              required
-            ></v-text-field>
-          </form>
-          <button class="button--green" @click="login">ログイン</button>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </div>
+  <v-flex xs6>
+    <v-card>
+      <v-card-title>Login</v-card-title>
+      <v-card-text>
+        <v-form>
+          <v-text-field
+            name="login"
+            label="メールアドレス"
+            type="text"
+            v-model="mail"
+            required
+          ></v-text-field>
+          <v-text-field
+            name="password"
+            label="パスワード"
+            id="password"
+            type="password"
+            v-model="pass"
+            required
+          ></v-text-field>
+        </v-form>
+        <v-btn class="button--green" @click="login">ログイン</v-btn>
+      </v-card-text>
+    </v-card>
+  </v-flex>
 </template>
 
 <script lang="ts">
@@ -34,8 +32,6 @@ import { auth } from '../plugins/firebase'
 
 @Component({
   layout: 'default',
-  components: {
-  }
 })
 export default class LoginPage extends Vue {
   mail: string = ''
@@ -57,9 +53,5 @@ export default class LoginPage extends Vue {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>

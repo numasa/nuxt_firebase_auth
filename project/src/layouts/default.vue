@@ -1,8 +1,34 @@
 <template>
-  <div>
-    <nuxt />
-  </div>
+  <v-app>
+    <v-navigation-drawer app>
+    </v-navigation-drawer>
+
+    <default-header />
+
+    <v-content>
+      <v-container>
+        <nuxt />
+      </v-container>
+    </v-content>
+
+    <v-footer app>
+    </v-footer>
+  </v-app>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import DefaultHeader from './header.vue'
+
+// Topページ
+@Component({
+  name: 'default',
+  components: {
+    DefaultHeader,
+  }
+})
+export default class Default extends Vue {}
+</script>
 
 <style>
 html {
