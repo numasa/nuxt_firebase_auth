@@ -2,31 +2,33 @@
   <v-app-bar app>
     <v-toolbar-title><a href='/'>Sample Project</a></v-toolbar-title>
     <v-spacer></v-spacer>
-    <div v-if="loginUser">
+    <v-row>
+    <v-col v-if="loginUser">
       <v-row>
         <v-col cols=2>
           <v-avatar color="indigo">
             <v-icon dark>mdi-account-circle</v-icon>
           </v-avatar>
         </v-col>
-        <v-col cols=6>
+        <v-col cols=5>
          <div class="text-truncate my-3">{{ loginUser }}</div>
         </v-col>
-        <v-col cols=4>
+        <v-col cols=5>
           <v-btn class="button--green my-1" @click="logout"><span class="text-truncate">ログアウト</span></v-btn>
         </v-col>
       </v-row>
-    </div>
-    <div v-else>
+    </v-col>
+    <v-col cols=12 v-else>
       <v-row>
-        <v-col cols=7>
+        <v-col cols=6>
           <div class="text-truncate my-3">未ログインです</div>
         </v-col>
-        <v-col cols=5>
-          <v-btn class="button--green my-1" @click="login" align="right"><span class="text-truncate">ログイン</span></v-btn>
+        <v-col cols=6>
+          <v-btn class="button--green my-1" @click="login" align="right"><span class="text-truncate">ログインへ</span></v-btn>
         </v-col>
       </v-row>
-    </div>
+    </v-col>
+    </v-row>
   </v-app-bar>
 </template>
 

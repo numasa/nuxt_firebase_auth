@@ -78,6 +78,7 @@ const nuxtConfig: Configuration = {
   },
   router: {
     middleware: ['auth']
-  }
+  },
+  hardSource: true,
 }
 module.exports = nuxtConfig
