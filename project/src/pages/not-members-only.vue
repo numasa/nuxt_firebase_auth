@@ -4,8 +4,10 @@
       <v-card-title>このページは</v-card-title>
       <v-card-text>
         ログインしていないユーザも見ることができる
-        <a href='/' class='button--green'>Go To Top</a>
       </v-card-text>
+      <v-card-actions class="justify-center">
+        <a href='/' class='button--green'>Go To Top</a>
+      </v-card-actions>
     </v-card>
   </v-flex>
 </template>
