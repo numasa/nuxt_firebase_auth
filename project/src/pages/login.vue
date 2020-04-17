@@ -20,7 +20,12 @@
             required
           ></v-text-field>
         </v-form>
-        <v-btn class="button--green" @click="login">ログイン</v-btn>
+        <v-row justify="center">
+          <v-btn class="button--green" @click="login">ログイン</v-btn>
+        </v-row>
+        <v-row justify="center" class="mt-5">
+          <v-btn text href="/signup">新規登録</v-btn>
+        </v-row>
       </v-card-text>
     </v-card>
   </v-flex>
