@@ -85,7 +85,7 @@ $ docker-compose run -p 9005:9005 vue ash
 ? Select a default Firebase project for this directory: {your Firebase project}
 ? What do you want to use as your public directory? dist
 ? Configure as a single-page app (rewrite all urls to /index.html)? N
-? File dist/index.html already exists. Overwrite? (y/N) y
+? File dist/index.html already exists. Overwrite? (y/N) N
 ✔  Firebase initialization complete!  
 ```
 
