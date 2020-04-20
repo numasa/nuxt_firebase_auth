@@ -7,12 +7,12 @@
           <v-row justify="center" class="ma-2">
             <v-btn block color="#DB4437" @click="googleLogin" class="white--text"><v-icon left>mdi-google</v-icon>google</v-btn>
           </v-row>
-          <v-row justify="center" class="ma-2">
-            <v-btn block color="#1DA1F2" class="white--text"><v-icon left>mdi-twitter</v-icon>twitter</v-btn>
+          <!-- <v-row justify="center" class="ma-2">
+            <v-btn block color="#1DA1F2" @click="twitterLogin" class="white--text" disabled><v-icon left>mdi-twitter</v-icon>twitter</v-btn>
           </v-row>
           <v-row justify="center" class="ma-2">
-            <v-btn block color="#3B5998" class="white--text"><v-icon left>mdi-facebook</v-icon>facebook</v-btn>
-          </v-row>
+            <v-btn block color="#3B5998" @click="facebookLogin" class="white--text" disabled><v-icon left>mdi-facebook</v-icon>facebook</v-btn>
+          </v-row> -->
         </v-card-text>
       </v-card>
     </v-col>
@@ -81,6 +81,16 @@ export default class LoginPage extends Vue {
 
   googleLogin() {
     const provider = new fb.auth.GoogleAuthProvider()
+    fb.auth().signInWithRedirect(provider)
+  }
+
+  twitterLogin() {
+    const provider = new fb.auth.TwitterAuthProvider()
+    fb.auth().signInWithRedirect(provider)
+  }
+
+  facebookLogin() {
+    const provider = new fb.auth.FacebookAuthProvider()
     fb.auth().signInWithRedirect(provider)
   }
 }
