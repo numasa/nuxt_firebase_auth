@@ -1,24 +1,8 @@
 <template>
   <v-row no-gutters>
-    <v-col clos="6">
+    <v-col>
       <v-card height="100%">
-        <v-card-title>SNSでログイン</v-card-title>
-        <v-card-text>
-          <v-row justify="center" class="ma-2">
-            <v-btn block color="#DB4437" class="white--text"><v-icon left>mdi-google</v-icon>google</v-btn>
-          </v-row>
-          <v-row justify="center" class="ma-2">
-            <v-btn block color="#1DA1F2" class="white--text"><v-icon left>mdi-twitter</v-icon>twitter</v-btn>
-          </v-row>
-          <v-row justify="center" class="ma-2">
-            <v-btn block color="#3B5998" class="white--text"><v-icon left>mdi-facebook</v-icon>facebook</v-btn>
-          </v-row>
-        </v-card-text>
-      </v-card>
-      </v-col>
-      <v-col>
-      <v-card height="100%">
-        <v-card-title>メールアドレスでログイン</v-card-title>
+        <v-card-title>ユーザ情報を登録してください</v-card-title>
         <v-card-text>
           <v-form>
             <v-text-field
@@ -58,7 +42,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { auth } from '../plugins/firebase'
+import { fb } from '../plugins/firebase'
 
 @Component({
   layout: 'default',
@@ -71,9 +55,9 @@ export default class LoginPage extends Vue {
   required: any = (value: any) => !!value || "入力してください"
 
   signup() {
-    auth.createUserWithEmailAndPassword(this.mail, this.password)
+    fb.auth().createUserWithEmailAndPassword(this.mail, this.password)
       .then(user => {
-        let currentUser: any | null = auth.currentUser;
+        let currentUser: any | null = fb.auth().currentUser;
         currentUser.updateProfile({ displayName: this.name })
         this.$router.push('/')
       })

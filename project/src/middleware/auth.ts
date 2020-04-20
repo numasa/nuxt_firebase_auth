@@ -1,8 +1,8 @@
 import { Middleware } from '@nuxt/types'
-import { auth } from '../plugins/firebase'
+import { fb } from '../plugins/firebase'
 
 const middleware:Middleware = ({ route, redirect }) => {
-  auth.onAuthStateChanged((user) => {
+  fb.auth().onAuthStateChanged((user) => {
     if (! user && !route.path.startsWith('/login') ) {
       // 特定のPage以外はLogin画面へredirect
       // TopPage, signup, not-members-only はredirectしない
@@ -10,6 +10,9 @@ const middleware:Middleware = ({ route, redirect }) => {
       else if ( route.path.startsWith('/signup') ) {}
       else if ( route.path.startsWith('/not-members-only') ) {}
       else return redirect('/login')
+    } else if ( user && route.path.startsWith('/login') ) {
+      // ソーシャル認証後はTop画面へredirect
+      return redirect('/')
     }
   })
 }

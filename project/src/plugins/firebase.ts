@@ -1,5 +1,4 @@
-import firebase from "firebase";
-import 'firebase/auth'
+import firebase from "firebase"
 
 const config = {
   apiKey: process.env.FB_API_KEY,
@@ -14,4 +13,4 @@ const config = {
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
 }
-export const auth = firebase.auth()
+export const fb = firebase

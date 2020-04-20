@@ -27,7 +27,7 @@
       <v-menu bottom left>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-          <v-avatar color="teal" >
+          <v-avatar color="teal">
             <v-icon dark>mdi-account-circle</v-icon>
           </v-avatar>
           </v-btn>
@@ -50,27 +50,27 @@
       </v-menu>
     </div>
     <div v-else>
-      <v-btn class="button--green my-1" @click="login" align="right">ログインへ</v-btn>
+      <v-btn class="my-1" @click="login" align="right">ログインへ</v-btn>
     </div>
   </v-app-bar>
 </template>
 
 <script lang="ts">
 import { Component, Watch, Vue } from 'vue-property-decorator'
-import { auth } from '../plugins/firebase'
+import { fb } from '../plugins/firebase'
 
 @Component
 export default class DefaultHeader extends Vue {
   loginUser:string  | null = null
   async mounted() {
-    await auth.onAuthStateChanged((user) => {
+    await fb.auth().onAuthStateChanged((user) => {
       if(user) {
         this.loginUser = user.displayName
       }
     })
   }
   async logout() {
-    await auth.signOut()
+    await fb.auth().signOut()
     this.loginUser = null
     this.$router.push('/')
   }
