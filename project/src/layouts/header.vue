@@ -65,7 +65,7 @@ export default class DefaultHeader extends Vue {
   async mounted() {
     await auth.onAuthStateChanged((user) => {
       if(user) {
-        this.loginUser = user.email
+        this.loginUser = user.displayName
       }
     })
   }

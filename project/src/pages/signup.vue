@@ -5,13 +5,13 @@
         <v-card-title>SNSでログイン</v-card-title>
         <v-card-text>
           <v-row justify="center" class="ma-2">
-            <v-btn block color="#DB4437" @click="login" class="white--text"><v-icon left>mdi-google</v-icon>google</v-btn>
+            <v-btn block color="#DB4437" class="white--text"><v-icon left>mdi-google</v-icon>google</v-btn>
           </v-row>
           <v-row justify="center" class="ma-2">
-            <v-btn block color="#1DA1F2" @click="login" class="white--text"><v-icon left>mdi-twitter</v-icon>twitter</v-btn>
+            <v-btn block color="#1DA1F2" class="white--text"><v-icon left>mdi-twitter</v-icon>twitter</v-btn>
           </v-row>
           <v-row justify="center" class="ma-2">
-            <v-btn block color="#3B5998" @click="login" class="white--text"><v-icon left>mdi-facebook</v-icon>facebook</v-btn>
+            <v-btn block color="#3B5998" class="white--text"><v-icon left>mdi-facebook</v-icon>facebook</v-btn>
           </v-row>
         </v-card-text>
       </v-card>
@@ -23,28 +23,32 @@
           <v-form>
             <v-text-field
               name="name"
-              label="名前"
+              label="ユーザー名"
               type="text"
               v-model="name"
-              required
+              :rules="[required]"
             ></v-text-field>
             <v-text-field
               name="mail"
               label="メールアドレス"
               type="text"
               v-model="mail"
-              required
+              :rules="[required]"
             ></v-text-field>
             <v-text-field
               name="password"
               label="パスワード"
               type="password"
               v-model="password"
-              required
+              :rules="[required]"
             ></v-text-field>
           </v-form>
+          <v-row id="message-area" justify="center"></v-row>
           <v-row justify="center">
-            <v-btn class="button--green" @click="login">メールを送信</v-btn>
+            <v-btn
+              @click="signup"
+              :disabled="!name||!mail||!password"
+            >登録する</v-btn>
           </v-row>
         </v-card-text>
       </v-card>
@@ -60,13 +64,27 @@ import { auth } from '../plugins/firebase'
   layout: 'default',
 })
 export default class LoginPage extends Vue {
+  name: string = ''
   mail: string = ''
-  pass: string = ''
+  password: string = ''
 
-  login() {
-    auth.signInWithEmailAndPassword(this.mail, this.pass)
-      .then(user => this.$router.push('/'))
-      .catch(e => alert(e.message))
+  required: any = (value: any) => !!value || "入力してください"
+
+  signup() {
+    auth.createUserWithEmailAndPassword(this.mail, this.password)
+      .then(user => {
+        let currentUser: any | null = auth.currentUser;
+        currentUser.updateProfile({ displayName: this.name })
+        this.$router.push('/')
+      })
+      .catch(e => {
+        const messageArea: any | null = document.getElementById('message-area')
+        messageArea.innerHTML = ''
+        if(e.message == "The email address is badly formatted.") messageArea.insertAdjacentHTML('afterbegin','<strong class="red--text text--lighten-1">メールアドレスの形式に誤りがあります</strong>')
+        else if (e.message == "Password should be at least 6 characters") messageArea.insertAdjacentHTML('afterbegin','<strong class="red--text text--lighten-1">パスワードは6文字以上で入力してください</strong>')
+        else if (e.message == "The email address is already in use by another account.") messageArea.insertAdjacentHTML('afterbegin','<strong class="red--text text--lighten-1">入力されたメールアドレスはすでに使われています</strong>')
+        else messageArea.insertAdjacentHTML('afterbegin','<strong class="red--text text--lighten-1">'+ e.message + '</strong>')
+      })
   }
 }
 </script>
