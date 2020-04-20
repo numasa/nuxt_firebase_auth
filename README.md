@@ -1,8 +1,10 @@
 Sample Project on Nuxt.js / Firebase Authentication
 ====
 
-[Firebase Authentication](https://firebase.google.com/docs/auth?hl=ja)でメール/パスワードでの認証</br>
+[Firebase Authentication](https://firebase.google.com/docs/auth?hl=ja)で下記の認証を実装</br>
 Nuxt.js / Typescript / docker の[ベースプロジェクト](https://github.com/numasa/nuxt_typescript_on_docker)を利用
+- メール/パスワード
+- Googleアカウント
 
 ## Description
 - programming language TypeScript
