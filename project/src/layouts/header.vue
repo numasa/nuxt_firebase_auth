@@ -35,16 +35,19 @@
         
         <v-list>
           <v-list-item>
-            <v-list-item-title>
-              <v-icon class="mx-2">mdi-account</v-icon>
-              {{ loginUser }}
-            </v-list-item-title>
+            <v-icon class="mx-2">mdi-account</v-icon>
+            {{ loginUser }}
+          </v-list-item>
+          <v-list-item v-if="providerId=='password'">
+            <v-icon class="mx-2">mdi-email</v-icon>
+            logined by Email
+          </v-list-item>
+          <v-list-item v-else-if="providerId=='google.com'">
+            <v-icon class="mx-2">mdi-google</v-icon>
+            logined by google
           </v-list-item>
           <v-list-item>
-            <v-list-item-title>
-              <v-btn rounded dark color="teal" class="mx-2">Edit</v-btn>
-              <v-btn rounded dark color="grey" class="mx-2" @click="logout">Logout</v-btn>
-            </v-list-item-title>
+            <v-btn block rounded dark color="grey" @click="logout">ログアウト</v-btn>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -67,6 +70,8 @@ import { fb } from '../plugins/firebase'
 export default class DefaultHeader extends Vue {
   loginUser: string  | null = null
   isLoading: boolean = true
+  providerId: string = ''
+
   async mounted() {
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
@@ -74,6 +79,9 @@ export default class DefaultHeader extends Vue {
       fb.auth().onAuthStateChanged((user) => {
         if(user) {
           this.loginUser = user.displayName
+          if(user.providerData[0]) {
+            this.providerId = user.providerData[0].providerId
+          }
         }
         this.isLoading = false
         this.$nuxt.$loading.finish()

@@ -71,7 +71,7 @@ html {
   color: #35495e;
   text-decoration: none;
   padding: 10px 30px;
-  margin-left: 15px;
+  margin: 15px;
 }
 
 .button--grey:hover {
