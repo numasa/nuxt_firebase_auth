@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-navigation-drawer app>
-    </v-navigation-drawer>
+    <!-- <v-navigation-drawer app>
+    </v-navigation-drawer> -->
 
     <default-header />
 

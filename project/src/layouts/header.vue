@@ -23,7 +23,7 @@
       </a>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <div v-if="loginUser">
+    <div v-if="loginUser && !isLoading">
       <v-menu bottom left>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
@@ -49,24 +49,35 @@
         </v-list>
       </v-menu>
     </div>
-    <div v-else>
+    <div v-else-if="!loginUser && !isLoading">
       <v-btn class="my-1" @click="login" align="right">ログインへ</v-btn>
+    </div>
+    <div v-else>
     </div>
   </v-app-bar>
 </template>
 
 <script lang="ts">
-import { Component, Watch, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import { fb } from '../plugins/firebase'
 
-@Component
+@Component({
+  layout: 'default',
+})
 export default class DefaultHeader extends Vue {
-  loginUser:string  | null = null
+  loginUser: string  | null = null
+  isLoading: boolean = true
   async mounted() {
-    await fb.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.loginUser = user.displayName
-      }
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+
+      fb.auth().onAuthStateChanged((user) => {
+        if(user) {
+          this.loginUser = user.displayName
+        }
+        this.isLoading = false
+        this.$nuxt.$loading.finish()
+      })
     })
   }
   async logout() {
