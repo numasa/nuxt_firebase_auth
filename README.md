@@ -51,7 +51,7 @@ $ docker-compose run vue yarn install
 
 4. service run on localhost
 ```bash
-$ docker-compose run --service-ports vue yarn run dev
+$ docker-compose run --service-ports vue yarn dev
 ```
 
 5. access localhost:3000 by browser
